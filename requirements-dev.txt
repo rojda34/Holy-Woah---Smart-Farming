@@ -1,0 +1,47 @@
+# ============================================================================
+# KATS Project - Development Dependencies
+# Urban Rooftop Farming AI System
+# Install: pip install -r requirements-dev.txt
+# ============================================================================
+
+# PRODUCTION DEPENDENCIES
+-r requirements.txt
+
+# TESTING & QUALITY ASSURANCE
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+coverage==7.3.2
+
+# CODE QUALITY & LINTING
+black==23.12.1
+flake8==6.1.0
+pylint==3.0.3
+isort==5.13.2
+mypy==1.7.1
+
+# DOCUMENTATION
+sphinx==7.2.6
+sphinx-rtd-theme==2.0.0
+mkdocs==1.5.3
+
+# JUPYTER & NOTEBOOKS
+jupyter==1.0.0
+jupyterlab==4.0.9
+ipython==8.18.1
+notebook==7.0.6
+
+# DEVELOPMENT TOOLS
+ipdb==0.13.13
+python-dotenv==1.0.0
+
+# GIT HOOKS & AUTOMATION
+pre-commit==3.5.0
+husky==1.8.0
+
+# TYPE CHECKING
+pydantic==2.5.2
+
+# PROFILING & DEBUGGING
+memory-profiler==0.61.0
+line-profiler==4.1.0

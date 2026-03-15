@@ -1,0 +1,219 @@
+# ============================================================================
+# KATS Project .gitignore
+# Urban Rooftop Farming AI System
+# Purpose: Prevent sensitive, large, and temporary files from being tracked
+# ============================================================================
+
+# ============================================================================
+# PYTHON & VIRTUAL ENVIRONMENTS
+# ============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.venv
+venv/
+ENV/
+env/
+.venv/
+venv
+env
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# ============================================================================
+# STREAMLIT SPECIFIC
+# ============================================================================
+.streamlit/secrets.toml
+.streamlit/config_local.toml
+.streamlit/logger.log
+.streamlit/cache/
+.streamlit/downloads/
+
+# ============================================================================
+# DATA & DATASETS (CRITICAL - Never commit raw data)
+# ============================================================================
+data/raw/**
+!data/raw/.gitkeep
+data/processed/**
+!data/processed/.gitkeep
+*.csv
+*.xlsx
+*.xls
+*.json
+!.github/**/*.json
+*.jsonl
+*.parquet
+*.feather
+
+# ============================================================================
+# DATABASE & STORAGE
+# ============================================================================
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+
+# ============================================================================
+# MACHINE LEARNING MODELS & WEIGHTS (CRITICAL)
+# ============================================================================
+models/weights/**
+!models/weights/.gitkeep
+models/artifacts/**
+!models/artifacts/.gitkeep
+*.pkl
+*.pickle
+*.joblib
+*.model
+*.h5
+*.keras
+*.pt
+*.pth
+*.onnx
+*.pb
+*.gzip
+scaler.pkl
+encoder.pkl
+vectorizer.pkl
+
+# ============================================================================
+# NOTEBOOKS
+# ============================================================================
+.ipynb_checkpoints/
+*_checkpoints/
+*.ipynb_checkpoints
+.jupyterlab-settings/
+
+# ============================================================================
+# IDE & EDITOR
+# ============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.atom/
+.sublime-project
+.sublime-workspace
+*.code-workspace
+.netbeans/
+*.sublime-session
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.tmTheme.cache
+
+# ============================================================================
+# ENVIRONMENT & SECRETS (CRITICAL)
+# ============================================================================
+.env
+.env.local
+.env.*.local
+.envrc
+.flake8
+.pylintrc
+config_secrets.py
+secrets.json
+secrets.toml
+.aws/
+.ssh/
+
+# ============================================================================
+# OS FILES
+# ============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+desktop.ini
+.AppleDouble
+.LSOverride
+
+# ============================================================================
+# LOGS & TEMP
+# ============================================================================
+*.log
+logs/
+*.tmp
+tmp/
+*.bak
+*.backup
+*.swp
+temp/
+.temp/
+
+# ============================================================================
+# IDE GENERATED
+# ============================================================================
+*.iml
+out/
+.gradle/
+.classpath
+.project
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# ============================================================================
+# DOCKER (if using containers)
+# ============================================================================
+docker-compose.override.yml
+.dockerignore
+
+# ============================================================================
+# MISCELLANEOUS
+# ============================================================================
+.vscode-server/
+node_modules/
+dist/
+build/
+*.mo
+*.pot
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+
+# ============================================================================
+# STREAMLIT CACHE
+# ============================================================================
+.**streamlit**
+./streamlit_cache/
