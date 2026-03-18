@@ -1,0 +1,109 @@
+# 1. Instalamos las herramientas necesarias
+!pip install streamlit pandas numpy -q
+!npm install -g localtunnel -q
+
+# 2. Obtenemos tu contraseña (IP) y la mostramos EN GRANDE
+import urllib.request
+ip = urllib.request.urlopen('https://ipv4.icanhazip.com').read().decode('utf8').strip()
+print("\n" + "="*60)
+print(f"🔴🔴🔴 TU CONTRASEÑA ES: {ip} 🔴🔴🔴")
+print("Cópiala y pégala en el enlace que aparecerá abajo al terminar de cargar...")
+print("="*60 + "\n")
+
+# 3. Creamos el archivo de tu aplicación con los datos de KATS
+with open('app.py', 'w', encoding='utf-8') as f:
+    f.write('''import streamlit as st
+import pandas as pd
+import numpy as np
+
+# Configuración a pantalla completa
+st.set_page_config(page_title="KATS Dashboard", layout="wide", initial_sidebar_state="expanded")
+
+# CSS para estilo limpio y moderno
+st.markdown("""
+<style>
+    .stApp { background-color: #f4f7f6; }
+    [data-testid="stSidebar"] { background-color: #111111; color: white; }
+    [data-testid="stMetric"], .stChatMessage, div[data-testid="stVerticalBlock"] > div > div[data-testid="element-container"] > div > div[data-testid="stMarkdownContainer"] {
+        background-color: #ffffff !important;
+        border-radius: 16px !important;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05) !important;
+        padding: 15px !important;
+        border: none !important;
+    }
+    label, p { color: #333333 !important; }
+    h1, h2, h3, h4 { color: #111111 !important; }
+</style>
+""", unsafe_allow_html=True)
+
+# --- GENERACIÓN DE DATOS ---
+dias = pd.date_range(end=pd.Timestamp.today(), periods=14)
+consumo_sin_ia = np.random.normal(100, 10, 14)
+consumo_con_ia = consumo_sin_ia * 0.55
+df_agua = pd.DataFrame({'Consumo Tradicional (L)': consumo_sin_ia, 'Consumo Optimizado KATS (L)': consumo_con_ia}, index=dias)
+salud_historica = np.linspace(65.0, 78.5, 14) + np.random.normal(0, 2, 14)
+df_salud = pd.DataFrame({'Salud del Sistema (RF %)': salud_historica}, index=dias)
+
+# --- BARRA LATERAL ---
+with st.sidebar:
+    st.title("KATS")
+    st.markdown("🏠 Dashboard IA")
+    st.markdown("🌊 ANN Water")
+    st.markdown("🦠 SVM Disease")
+    st.markdown("🌳 RF Health")
+    st.markdown("⚙️ Ajustes")
+
+# --- CABECERA ---
+st.markdown("## Hello, Marita! 🌱")
+st.markdown("KATS: AI-Powered Decision Support System for Urban Agriculture")
+st.markdown("<br>", unsafe_allow_html=True)
+
+# --- ESTRUCTURA PRINCIPAL ---
+col_centro, col_ia = st.columns([3, 1], gap="large")
+
+with col_centro:
+    c1, c2, c3 = st.columns([1, 1.5, 1])
+
+    with c1:
+        st.markdown("#### Model Outputs")
+        st.metric("🌊 ANN Water Reduction", "45%", "Óptimo")
+        st.metric("🦠 SVM Disease Risk", "HIGH", "-15% Salud")
+        st.metric("🌳 RF System Health", "78.5%", "+2.1%")
+        st.button("Ver Fusión de Decisiones")
+
+    with c2:
+        st.markdown("#### 🌊 Optimización de Agua (ANN)")
+        st.caption("Comparativa de consumo: Tradicional vs KATS AI")
+        st.line_chart(df_agua, color=["#FF5733", "#33C1FF"])
+
+        st.markdown("**Alertas del Sistema (SVM)**")
+        st.error("⚠️ Riesgo Fúngico ALTO detectado (Peso: 30%)")
+
+    with c3:
+        st.markdown("#### 🌳 Evolución de Salud (RF)")
+        st.caption("Predicción de salud del cultivo (Peso: 35%)")
+        st.area_chart(df_salud, color="#28B463")
+
+        st.markdown("#### RLHF Feedback")
+        st.progress(0.60, text="📈 60% Approval Rate (Learning Well)")
+
+with col_ia:
+    st.markdown("#### Klif AI Assistant 💧")
+
+    st.info("**Decision Engine Formula:**\\n(ANN × 0.35) + (SVM × 0.30) + (RF × 0.35)")
+    st.warning("**Fused Action:** Reducir agua 45% y aplicar tratamiento fúngico preventivo.")
+
+    chat_container = st.container(height=350)
+    with chat_container:
+        st.chat_message("assistant", avatar="💧").write("¡Hola Marita! Según la capa de fusión, el riesgo de enfermedad (SVM) es alto. El modelo ANN sugiere reducir el agua un 45%. ¿Apruebas esta decisión?")
+
+    c_btn1, c_btn2 = st.columns(2)
+    c_btn1.button("✅ Aprobar")
+    c_btn2.button("👎 Rechazar")
+
+    if prompt := st.chat_input("Ask Klif..."):
+        st.chat_message("user").write(prompt)
+''')
+
+# 4. Lanzamos Streamlit con protección CORS/XSRF desactivada para evitar errores en el túnel
+!streamlit run app.py --server.enableCORS false --server.enableXsrfProtection false & npx localtunnel --port 8501
