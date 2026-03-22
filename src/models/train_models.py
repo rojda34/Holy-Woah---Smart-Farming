@@ -7,6 +7,9 @@ Models:
 2. SVM Classifier (The Guard) - predicts crop disease classification
 3. Random Forest (The Strategist) - predicts time_slot and building_priority
 
+Data Source: Real-world datasets loaded from final dataset folder via real_data_loader.py
+(Replaces synthetic data generation)
+
 Author: KATS ML Engineering Team
 """
 
@@ -33,6 +36,14 @@ from sklearn.metrics import (
 from sklearn.model_selection import train_test_split, cross_val_score, KFold, StratifiedKFold
 from sklearn.neural_network import MLPRegressor
 from sklearn.svm import SVC
+
+# Import real data loader (support both module and direct script execution)
+try:
+    from ..utils.real_data_loader import load_all_real_data
+except ImportError:
+    # If relative import fails, try absolute import
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from utils.real_data_loader import load_all_real_data
 
 # ============================================================================
 # CONFIGURATION & LOGGING
@@ -729,6 +740,12 @@ class KatsModelTrainer:
 def main():
     """Main entry point for command-line execution."""
     try:
+        # Load real data first (replaces synthetic generation)
+        logger.info("Initializing data loading from real-world datasets...")
+        load_all_real_data()
+        
+        # Train models with loaded data
+        logger.info("\nInitializing model trainer...")
         trainer = KatsModelTrainer()
         exit_code = trainer.run()
         return exit_code

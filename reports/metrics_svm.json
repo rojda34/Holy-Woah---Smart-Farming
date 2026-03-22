@@ -1,45 +1,36 @@
 {
   "train": {
-    "accuracy": 0.9422222222222222,
-    "precision_weighted": 0.9413243462278396,
-    "recall_weighted": 0.9422222222222222,
-    "f1_weighted": 0.9409059017753832
+    "accuracy": 1.0,
+    "precision_weighted": 1.0,
+    "recall_weighted": 1.0,
+    "f1_weighted": 1.0
   },
   "validate": {
-    "accuracy": 0.9333333333333333,
-    "precision_weighted": 0.9330426134897205,
-    "recall_weighted": 0.9333333333333333,
-    "f1_weighted": 0.9326349283004758
+    "accuracy": 1.0,
+    "precision_weighted": 1.0,
+    "recall_weighted": 1.0,
+    "f1_weighted": 1.0
   },
   "test": {
-    "accuracy": 0.91,
-    "precision_weighted": 0.9101608833318486,
-    "recall_weighted": 0.91,
-    "f1_weighted": 0.90979185977375,
+    "accuracy": 1.0,
+    "precision_weighted": 1.0,
+    "recall_weighted": 1.0,
+    "f1_weighted": 1.0,
     "confusion_matrix": [
       [
-        108,
-        5,
+        4000,
         0,
-        2
+        0
       ],
       [
-        5,
-        109,
-        2,
-        2
-      ],
-      [
-        4,
-        1,
-        23,
-        2
-      ],
-      [
-        1,
         0,
-        3,
-        33
+        1000,
+        0
+      ],
+      [
+        0,
+        0,
+        1000
       ]
     ]
   }
